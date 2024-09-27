@@ -1,8 +1,99 @@
-# React + Vite
+# 축제7ㅏ자
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[API : 한국관광공사\_국문 관광정보 서비스\_GW ](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15101578#/)
 
-Currently, two official plugins are available:
+## 프로젝트 소개
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+현재 국내에서 진행하는 축제 정보 제공
+지역으로 검색, 날짜로 검색, 키워드로 검색 기능 제공
+상세정보보기 및 위시리스트에 저장가능
+모바일 기준으로 사이트 제작
+```
+
+## 개발 환경
+
+-   vite
+-   react
+-   javascript
+-   tailwind
+-   zustand
+
+## 개발 진행 사항
+
+### 컴포넌트
+
+> header
+>
+> -   로고 ✅
+>
+> -   다크모드, 라이트모드 ❎
+>
+> navigation
+>
+> -   페이지 이동 ✅
+>
+> -   현재 페이지 아이콘 색깔 변경 ✅
+>
+> button 컴포넌트 ✅
+>
+> icon 컴포넌트 ✅
+>
+> card 컴포넌트
+>
+> -   img ✅
+> -   title, date, location ✅
+> -   wish ❎
+> -   state ❎
+>
+> cardList 컴포넌트 ✅
+
+### 홈 페이지
+
+> swiper
+>
+> -   regionList로 버튼 생성 ✅
+> -   버튼 클릭 시 region code api로 전송 ✅
+>
+> 축제 정보 api로 받아오기 ✅
+>
+> scroll ❎
+
+### 검색 페이지
+
+❎
+
+### 찜 페이지
+
+❎
+
+### 상세 페이지
+
+❎
+
+### 코드 clone 및 실행 시
+
+-   코드 clone
+
+```
+git clone https://github.com/Commeci/goFestival.git
+```
+
+-   종속성 설치
+
+```
+npm install
+```
+
+-   .env 파일 설정 (프로젝트의 root에 생성)
+
+```
+VITE_PUBLIC_DATA_API_KEY = [한국관광공사 API키]
+
+```
+
+-   개발 서버 실행
+
+```
+npm run dev
+```
