@@ -22,12 +22,12 @@ export function Header() {
 
     return (
         <div className="z-10 p-3 bg-white fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-[480px] shadow-bottom">
-            <div className=" flex justify-between mb-3">
+            <div className=" flex justify-between">
                 <img src={logo} alt="축제가자 로고" className="w-24" />
                 <LightModeIcon />
             </div>
             {isHomePage && (
-                <Swiper spaceBetween={5} slidesPerView={5}>
+                <Swiper spaceBetween={5} slidesPerView={5} className="mt-3">
                     {regionList.map((region) => (
                         <SwiperSlide key={region.code}>
                             <button
