@@ -89,7 +89,6 @@ npm install
 
 ```
 VITE_PUBLIC_DATA_API_KEY = [한국관광공사 API키]
-
 ```
 
 -   개발 서버 실행
