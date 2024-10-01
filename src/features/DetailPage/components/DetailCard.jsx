@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/ui/Button";
 import {
     ArrowBack,
@@ -7,17 +8,20 @@ import {
     WishFullIcon,
 } from "../../../components/ui/icon";
 
-export function DetailCard() {
+export function DetailCard({ data }) {
+    const navigate = useNavigate();
     return (
         <div>
-            <button>
+            <button className="absolute" onClick={() => navigate("/")}>
                 <ArrowBack />
             </button>
-            <h2>title</h2>
+            <h2 className="text-base font-bold text-center mb-6">
+                {data.title}
+            </h2>
             <div className="w-full relative mb-6">
-                <div className="w-full h-64 overflow-hidden">
+                <div className="w-full h-64 overflow-hidden mb-3">
                     <img
-                        src=""
+                        src={data.firstimage}
                         alt="축제 썸네일"
                         className="w-full h-full object-cover rounded-lg"
                     />
@@ -26,19 +30,21 @@ export function DetailCard() {
                 <button className="absolute top-0 right-0 mt-3 mr-3">
                     <WishFullIcon />
                 </button>
-                <p className="text-sm text-custom-font-gray">
+                <p className="text-sm text-custom-font-gray flex mb-2 items-center">
                     <CalendarIcon />
-                    <span>date</span>
+                    <span className="ml-2"> {data.createdtime}</span>
                 </p>
-                <p className="text-sm text-custom-font-gray">
+                <p className="text-sm text-custom-font-gray flex mb-2 items-center">
                     <LocationIcon />
-                    <span>location</span>
+                    <span className="ml-2">
+                        {data.addr1} {data.addr2}
+                    </span>
                 </p>
-                <p className="text-sm text-custom-font-gray">
+                <p className="text-sm text-custom-font-gray flex mb-2 items-center">
                     <CallIcon />
-                    <span>call</span>
+                    <span className="ml-2"> {data.tel}</span>
                 </p>
-                <p>text</p>
+                <p>{data.overview}</p>
             </div>
         </div>
     );

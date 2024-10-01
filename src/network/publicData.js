@@ -43,6 +43,7 @@ export const getFestivalDetail = async (contentId) => {
                 firstImageYN: "Y",
                 areacodeYN: "Y",
                 catcodeYN: "Y",
+                addrinfoYN: "Y",
                 mapinfoYN: "Y",
                 overviewYN: "Y",
             },
