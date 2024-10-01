@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/ui/Button";
 import { ProgressBar } from "./ProgressBar";
-import { useState } from "react";
+import useSearchStore from "../../../store/searchStore";
 
 export function SearchKeyword() {
     const navigate = useNavigate();
-    const [keyword, setKeyword] = useState("");
+    const { setKeyword, keyword } = useSearchStore();
+
+    const handleSearch = () => {
+        navigate("/search");
+    };
 
     return (
         <div className="flex flex-col h-[calc(100vh-250px)">
@@ -29,11 +33,7 @@ export function SearchKeyword() {
                     fontSize="text-xs"
                     onClick={() => navigate("/search/step2")}
                 />
-                <Button
-                    text="검색"
-                    fontSize="text-xs"
-                    onClick={() => navigate("/search")}
-                />
+                <Button text="검색" fontSize="text-xs" onClick={handleSearch} />
             </div>
         </div>
     );

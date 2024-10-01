@@ -81,13 +81,14 @@ export function DetailCard({ data, date }) {
                 </div>
                 <Button
                     text={festivalStatus}
-                    classes={`absolute top-0 mt-3 ml-3 ${
+                    bgColor={
                         festivalStatus === "개최중"
                             ? "bg-custom-orange"
                             : festivalStatus === "예정"
                             ? "bg-custom-blue"
                             : "bg-gray-500"
-                    } text-white`}
+                    }
+                    classes="absolute top-0 mt-3 ml-3"
                 />
                 <button
                     className={`absolute top-0 right-0 mt-3 mr-3 ${

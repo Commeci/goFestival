@@ -1,20 +1,25 @@
-import { useState } from "react";
 import { regionList } from "../../../constants/regionList";
 import { ProgressBar } from "./ProgressBar";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/ui/Button";
+import useSearchStore from "../../../store/searchStore";
 
 export function SearchLocation() {
-    const [selectedRegion, setSelectedRegion] = useState("전체");
+    const { location, setLocation } = useSearchStore();
     const navigate = useNavigate();
 
     const handleRegionSelect = (region) => {
-        setSelectedRegion(region);
+        setLocation(region.name);
+        navigate("/search/step3");
+    };
+
+    const handleSkip = () => {
+        setLocation("전체");
         navigate("/search/step3");
     };
 
     return (
-        <div className="flex flex-col h-[calc(100vh-250px)">
+        <div className="flex flex-col h-[calc(100vh-250px)]">
             <div className="mt-[-90px] flex-grow overflow-hidden">
                 <ProgressBar />
                 <div className="flex-1 overflow-y-auto h-[calc(100vh-250px)] mt-10">
@@ -23,7 +28,7 @@ export function SearchLocation() {
                             <button
                                 key={region.code}
                                 className={`w-full p-6 text-lg border-b-2 border-custom-lightgray overflow-hidden ${
-                                    selectedRegion?.code === region.code
+                                    location === region.name
                                         ? "bg-custom-orange text-white"
                                         : "bg-white text-custom-font"
                                 }`}
@@ -45,7 +50,7 @@ export function SearchLocation() {
                 <Button
                     text="건너뛰기"
                     fontSize="text-xs"
-                    onClick={() => navigate("/search/step3")}
+                    onClick={handleSkip}
                 />
             </div>
         </div>
