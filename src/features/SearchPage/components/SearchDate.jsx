@@ -7,6 +7,7 @@ import { useState } from "react";
 import moment from "moment";
 import styled from "styled-components";
 
+// TODO: 오늘 날짜 폰트 색깔 이외에도 색깔들 관리
 const StyledCalendarContainer = styled.div`
     width: 100%;
     display: flex;
