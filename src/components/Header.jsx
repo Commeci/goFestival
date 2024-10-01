@@ -8,7 +8,7 @@ import "swiper/css/scrollbar";
 import logo from "../assets/logo.svg";
 import { LightModeIcon } from "./ui/icon";
 import { regionList } from "../constants/regionList";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useRegionStore from "../store/regionStore";
 
 export function Header() {
@@ -19,11 +19,17 @@ export function Header() {
     );
     const location = useLocation();
     const isHomePage = location.pathname === "/";
+    const navigate = useNavigate();
 
     return (
         <div className="z-10 p-3 bg-white fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-[480px] shadow-bottom">
             <div className=" flex justify-between">
-                <img src={logo} alt="축제가자 로고" className="w-24" />
+                <img
+                    src={logo}
+                    alt="축제가자 로고"
+                    className="w-24"
+                    onClick={() => navigate("/")}
+                />
                 <LightModeIcon />
             </div>
             {isHomePage && (
