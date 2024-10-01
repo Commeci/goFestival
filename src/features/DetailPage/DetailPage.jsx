@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { DetailCard } from "./components/DetailCard";
 import { MapArea } from "./components/MapArea";
 import { useEffect, useState } from "react";
@@ -6,6 +6,8 @@ import { getFestivalDetail } from "../../network/publicData";
 
 export default function DetailPage() {
     const { id } = useParams();
+    const location = useLocation();
+    const date = location.state?.date;
     const [festivalDetail, setFestivalDetail] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -30,7 +32,7 @@ export default function DetailPage() {
 
     return (
         <div className="mt-[-40px]">
-            <DetailCard data={festivalDetail} />
+            <DetailCard data={festivalDetail} date={date} />
             <MapArea mapx={festivalDetail.mapx} mapy={festivalDetail.mapy} />
         </div>
     );
