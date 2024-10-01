@@ -6,14 +6,30 @@ import { useEffect, useState } from "react";
 export function Card({ id, img, title, date, location }) {
     const navigate = useNavigate();
     const [isWished, setIsWished] = useState(false);
-    // TODO: 좋아요 기능으로 contentid 저장할때 날짜도 같이 저장하기
+    const [festivalStatus, setFestivalStatus] = useState("예정");
 
     useEffect(() => {
         const wishedItems = JSON.parse(
             localStorage.getItem("wishedItems") || "[]"
         );
         setIsWished(wishedItems.some((item) => item.id === id));
-    }, [id]);
+        const [startDate, endDate] = date.split("~");
+        const today = new Date();
+        const festivalStart = new Date(
+            startDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")
+        );
+        const festivalEnd = new Date(
+            endDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")
+        );
+
+        if (today >= festivalStart && today <= festivalEnd) {
+            setFestivalStatus("개최중");
+        } else if (today > festivalEnd) {
+            setFestivalStatus("종료");
+        } else {
+            setFestivalStatus("예정");
+        }
+    }, [id, date]);
 
     const handleCardClick = () => {
         navigate(`/detail/${id}`, { state: { date } });
@@ -37,7 +53,6 @@ export function Card({ id, img, title, date, location }) {
     };
 
     return (
-        // TODO: 카드 컴포넌트 축제 상태 처리하기
         <div className="w-full relative mb-6 " onClick={handleCardClick}>
             <div className="w-full h-64 overflow-hidden">
                 <img
@@ -46,7 +61,16 @@ export function Card({ id, img, title, date, location }) {
                     className="w-full h-full object-cover rounded-lg"
                 />
             </div>
-            <Button text="축제중" classes="absolute top-0 mt-3 ml-3" />
+            <Button
+                text={festivalStatus}
+                classes={`absolute top-0 mt-3 ml-3 ${
+                    festivalStatus === "개최중"
+                        ? "bg-custom-orange"
+                        : festivalStatus === "예정"
+                        ? "bg-custom-blue"
+                        : "bg-gray-500"
+                } text-white`}
+            />
             <button
                 className={`absolute top-0 right-0 mt-3 mr-3 ${
                     isWished ? "text-custom-orange" : "text-white opacity-80"
