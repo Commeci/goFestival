@@ -1,7 +1,11 @@
+import { DetailCard } from "./components/DetailCard";
+import { MapArea } from "./components/MapArea";
+
 export default function DetailPage() {
     return (
         <div>
-            <h1>Detail</h1>
+            <DetailCard />
+            <MapArea />
         </div>
     );
 }
