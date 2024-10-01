@@ -7,6 +7,7 @@ export function CardList({ items }) {
             {items.map((item) => (
                 <Card
                     key={item.contentid}
+                    id={item.contentid}
                     img={
                         item.firstimage && item.firstimage !== ""
                             ? item.firstimage
