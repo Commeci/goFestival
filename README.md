@@ -44,7 +44,7 @@
 > -   img ✅
 > -   title, date, location ✅
 > -   wish ✅
-> -   state ❎
+> -   state ✅
 >
 > cardList 컴포넌트 ✅
 >
@@ -84,7 +84,7 @@
 
 > 찜 항목 불러오기 ✅
 
-### 상세 페이지
+### 상세 페이지 ✅
 
 > DetailCard ✅
 >
@@ -96,9 +96,9 @@
 >
 > wish ✅
 >
-> 없는 이미지 처리 ❎
+> 없는 이미지 처리 ✅
 >
-> 주변 맛집 없는 경우 처리 ❎
+> 주변 맛집 없는 경우 처리 ✅
 
 ### 코드 clone 및 실행 시
 
@@ -118,6 +118,7 @@ npm install
 
 ```
 VITE_PUBLIC_DATA_API_KEY = [한국관광공사 API키]
+VITE_KAKAOMAP_API_KEY = [KAKAOMAP API 키]
 ```
 
 -   개발 서버 실행
