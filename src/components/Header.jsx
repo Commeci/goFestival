@@ -12,7 +12,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useRegionStore from "../store/regionStore";
 
 export function Header() {
-    // TODO: swiper 추가하기
     const selectedRegion = useRegionStore((state) => state.selectedRegion);
     const setSelectedRegion = useRegionStore(
         (state) => state.setSelectedRegion

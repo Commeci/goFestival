@@ -12,11 +12,11 @@ export function Card({ id, img, title, date, location }) {
         const wishedItems = JSON.parse(
             localStorage.getItem("wishedItems") || "[]"
         );
-        setIsWished(wishedItems.includes(id));
+        setIsWished(wishedItems.some((item) => item.id === id));
     }, [id]);
 
     const handleCardClick = () => {
-        navigate(`/detail/${id}`);
+        navigate(`/detail/${id}`, { state: { date } });
     };
 
     const handleWishClick = (e) => {
@@ -26,10 +26,10 @@ export function Card({ id, img, title, date, location }) {
         );
 
         if (isWished) {
-            const updatedItems = wishedItems.filter((item) => item !== id);
+            const updatedItems = wishedItems.filter((item) => item.id !== id);
             localStorage.setItem("wishedItems", JSON.stringify(updatedItems));
         } else {
-            wishedItems.push(id);
+            wishedItems.push({ id, date });
             localStorage.setItem("wishedItems", JSON.stringify(wishedItems));
         }
 

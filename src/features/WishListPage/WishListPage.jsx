@@ -13,19 +13,21 @@ export default function WishListPage() {
             );
 
             try {
-                const itemPromises = wishedItems.map((id) =>
-                    getFestivalDetail(id)
+                const itemPromises = wishedItems.map((item) =>
+                    getFestivalDetail(item.id)
                 );
                 const itemsData = await Promise.all(itemPromises);
 
-                const formattedItems = itemsData.map((response) => {
+                const formattedItems = itemsData.map((response, index) => {
                     const item = response.response.body.items.item[0];
+                    const [eventstartdate, eventenddate] =
+                        wishedItems[index].date.split("~");
                     return {
                         contentid: item.contentid,
                         firstimage: item.firstimage,
                         title: item.title,
-                        // eventstartdate: item.eventstartdate,
-                        // eventenddate: item.eventenddate,
+                        eventstartdate,
+                        eventenddate,
                         addr1: item.addr1,
                         addr2: item.addr2,
                     };
