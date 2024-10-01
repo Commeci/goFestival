@@ -3,9 +3,10 @@ import Button from "../../../components/ui/Button";
 import { ProgressBar } from "./ProgressBar";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { useState } from "react";
 import moment from "moment";
 import styled from "styled-components";
+import useSearchStore from "../../../store/searchStore";
+import { useEffect, useState } from "react";
 
 // TODO: 오늘 날짜 폰트 색깔 이외에도 색깔들 관리
 const StyledCalendarContainer = styled.div`
@@ -36,7 +37,7 @@ const StyledCalendarContainer = styled.div`
     /* 네비게이션 비활성화 됐을때 스타일 */
     .react-calendar__navigation button:disabled {
         background-color: white;
-        color: ${(props) => props.theme.darkBlack};
+        color: black;
     }
     /* 년/월 상단 네비게이션 칸 크기 줄이기 */
     .react-calendar__navigation__label {
@@ -51,34 +52,34 @@ const StyledCalendarContainer = styled.div`
     /* 일요일에만 빨간 폰트 */
     .react-calendar__month-view__weekdays__weekday--weekend
         abbr[title="일요일"] {
-        color: ${(props) => props.theme.red_1};
+        color: red;
     }
 
     /* 오늘 날짜 폰트 컬러 */
     .react-calendar__tile--now {
         background: none;
         abbr {
-            color: ${(props) => props.theme.primary_2};
+            color: #ff8343;
         }
     }
     /* 네비게이션 월 스타일 적용 */
     .react-calendar__year-view__months__month {
         border-radius: 0.8rem;
-        background-color: ${(props) => props.theme.gray_5};
+        background-color: none;
         padding: 0;
     }
 
     /* 네비게이션 현재 월 스타일 적용 */
     .react-calendar__tile--hasActive {
-        background-color: ${(props) => props.theme.primary_2};
+        background-color: none;
         abbr {
-            color: white;
+            color: #ff8343;
         }
     }
 
     /* 일 날짜 간격 */
     .react-calendar__tile {
-        padding: 5px 0px 18px;
+        padding: 20px 0px 20px;
         position: relative;
     }
 
@@ -91,7 +92,7 @@ const StyledCalendarContainer = styled.div`
         padding: 20px 6.6667px;
         font-size: 0.9rem;
         font-weight: 600;
-        color: ${(props) => props.theme.gray_1};
+        color: black;
     }
 
     /* 선택한 날짜 스타일 적용 */
@@ -104,22 +105,58 @@ const StyledCalendarContainer = styled.div`
 
 export function SearchDate() {
     const navigate = useNavigate();
-    const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+    const { dateRange, setDateRange } = useSearchStore();
+    const [localDateRange, setLocalDateRange] = useState(
+        dateRange || [null, null]
+    );
+    const [isInitialSelection, setIsInitialSelection] = useState(true);
+
+    useEffect(() => {
+        if (!dateRange) {
+            setDateRange(localDateRange);
+        }
+    }, []);
 
     const onChange = (value) => {
-        setDateRange(value);
+        setLocalDateRange(value);
+        if (
+            isInitialSelection &&
+            value[0] &&
+            value[1] &&
+            value[0] !== value[1]
+        ) {
+            setDateRange(value);
+            setIsInitialSelection(false);
+            navigate("/search/step2");
+        }
+    };
+
+    const handleSkip = () => {
+        const today = new Date();
+        setLocalDateRange([today, today]);
+        setDateRange([today, today]);
+        navigate("/search/step2");
+    };
+
+    const handleNext = () => {
+        if (localDateRange[0] && localDateRange[1]) {
+            setDateRange(localDateRange);
+            navigate("/search/step2");
+        }
     };
 
     const tileClassName = ({ date, view }) => {
-        const [start, end] = dateRange;
+        if (!localDateRange || localDateRange.length !== 2) return null;
+        const [start, end] = localDateRange;
 
         if (view === "month" && date >= start && date <= end) {
-            return "bg-custom-orange bg-opacity-50"; // Tailwind 클래스
+            return "bg-custom-orange bg-opacity-50";
         }
         return null;
     };
 
     const formatDateRange = (start, end) => {
+        if (!start || !end) return "";
         const startStr = moment(start).format("YYYY.MM.DD");
         const endStr = moment(end).format("YYYY.MM.DD");
         return startStr === endStr ? startStr : `${startStr} - ${endStr}`;
@@ -131,11 +168,16 @@ export function SearchDate() {
             <div className="flex flex-col justify-center m-auto mt-10 w-full">
                 <StyledCalendarContainer className="flex flex-col justify-center m-auto w-full px-4">
                     <div className="text-center mb-4 text-lg font-bold text-custom-orange">
-                        {formatDateRange(dateRange[0], dateRange[1])}
+                        {localDateRange && localDateRange.length === 2
+                            ? formatDateRange(
+                                  localDateRange[0],
+                                  localDateRange[1]
+                              )
+                            : "날짜를 선택하세요"}
                     </div>
                     <Calendar
                         onChange={onChange}
-                        value={dateRange}
+                        value={localDateRange}
                         selectRange={true}
                         tileClassName={tileClassName}
                         formatDay={(locale, date) => moment(date).format("DD")}
@@ -158,12 +200,26 @@ export function SearchDate() {
                     />
                 </StyledCalendarContainer>
             </div>
-            <div className="p-4 max-w-[480px] mx-auto w-full fixed bottom-20 left-0 right-0 flex justify-end">
+            <div className="p-4 max-w-[480px] mx-auto w-full fixed bottom-20 left-0 right-0 flex justify-between">
                 <Button
-                    text="건너뛰기"
+                    text="이전"
+                    bgColor="bg-custom-font-lightgray"
                     fontSize="text-xs"
-                    onClick={() => navigate("/search/step2")}
+                    onClick={() => navigate("/")}
                 />
+                {isInitialSelection ? (
+                    <Button
+                        text="건너뛰기"
+                        fontSize="text-xs"
+                        onClick={handleSkip}
+                    />
+                ) : (
+                    <Button
+                        text="다음"
+                        fontSize="text-xs"
+                        onClick={handleNext}
+                    />
+                )}
             </div>
         </div>
     );
