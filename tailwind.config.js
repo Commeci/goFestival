@@ -12,6 +12,9 @@ export default {
                     light: "#FFD700",
                     dark: "#FF5F00",
                 },
+                "custom-blue": {
+                    DEFAULT: "#002379",
+                },
                 "custom-darkmode": "#212135",
                 "custom-font": {
                     DEFAULT: "#161616",

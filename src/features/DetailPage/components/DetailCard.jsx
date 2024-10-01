@@ -8,19 +8,35 @@ import {
     WishFullIcon,
 } from "../../../components/ui/icon";
 import { useEffect, useState } from "react";
+import thumbnail from "../../../assets/thumbnail.png";
 
 export function DetailCard({ data, date }) {
-    // TODO: 없는 이미지 처리하기
-    // TODO: 찜 기능 처리하기
     const navigate = useNavigate();
     const [isWished, setIsWished] = useState(false);
+    const [festivalStatus, setFestivalStatus] = useState("예정");
 
     useEffect(() => {
         const wishedItems = JSON.parse(
             localStorage.getItem("wishedItems") || "[]"
         );
         setIsWished(wishedItems.some((item) => item.id === data.contentid));
-    }, [data.contentid]);
+        const [startDate, endDate] = date.split("~");
+        const today = new Date();
+        const festivalStart = new Date(
+            startDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")
+        );
+        const festivalEnd = new Date(
+            endDate.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3")
+        );
+
+        if (today >= festivalStart && today <= festivalEnd) {
+            setFestivalStatus("개최중");
+        } else if (today > festivalEnd) {
+            setFestivalStatus("종료");
+        } else {
+            setFestivalStatus("예정");
+        }
+    }, [data.contentid, date]);
 
     const handleWishClick = () => {
         const wishedItems = JSON.parse(
@@ -40,6 +56,13 @@ export function DetailCard({ data, date }) {
         setIsWished(!isWished);
     };
 
+    const getImageSource = () => {
+        if (data.firstimage && data.firstimage !== "") {
+            return data.firstimage;
+        }
+        return thumbnail;
+    };
+
     return (
         <div>
             <button className="absolute" onClick={() => navigate("/")}>
@@ -51,12 +74,21 @@ export function DetailCard({ data, date }) {
             <div className="w-full relative mb-6">
                 <div className="w-full h-64 overflow-hidden mb-3">
                     <img
-                        src={data.firstimage}
+                        src={getImageSource()}
                         alt="축제 썸네일"
                         className="w-full h-full object-cover rounded-lg"
                     />
                 </div>
-                <Button text="축제중" classes="absolute top-0 mt-3 ml-3" />
+                <Button
+                    text={festivalStatus}
+                    classes={`absolute top-0 mt-3 ml-3 ${
+                        festivalStatus === "개최중"
+                            ? "bg-custom-orange"
+                            : festivalStatus === "예정"
+                            ? "bg-custom-blue"
+                            : "bg-gray-500"
+                    } text-white`}
+                />
                 <button
                     className={`absolute top-0 right-0 mt-3 mr-3 ${
                         isWished
