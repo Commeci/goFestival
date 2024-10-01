@@ -9,6 +9,8 @@ import {
 } from "../../../components/ui/icon";
 
 export function DetailCard({ data }) {
+    // TODO: 없는 이미지 처리하기
+    // TODO: 찜 기능 처리하기
     const navigate = useNavigate();
     return (
         <div>

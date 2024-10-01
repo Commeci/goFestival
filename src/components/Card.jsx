@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export function Card({ id, img, title, date, location }) {
     const navigate = useNavigate();
     const [isWished, setIsWished] = useState(false);
+    // TODO: 좋아요 기능으로 contentid 저장할때 날짜도 같이 저장하기
 
     useEffect(() => {
         const wishedItems = JSON.parse(
@@ -15,7 +16,7 @@ export function Card({ id, img, title, date, location }) {
     }, [id]);
 
     const handleCardClick = () => {
-        navigate(`detail/${id}`);
+        navigate(`/detail/${id}`);
     };
 
     const handleWishClick = (e) => {
