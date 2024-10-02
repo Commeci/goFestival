@@ -1,3 +1,3 @@
 export function TopButtonIcon() {
-    return <span className="material-symbols-outlined">expand_circle_up</span>;
+    return <i className="fa-solid fa-chevron-up"></i>;
 }
