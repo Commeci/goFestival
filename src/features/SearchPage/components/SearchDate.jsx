@@ -200,13 +200,7 @@ export function SearchDate() {
                     />
                 </StyledCalendarContainer>
             </div>
-            <div className="p-4 max-w-[480px] mx-auto w-full fixed bottom-20 left-0 right-0 flex justify-between">
-                <Button
-                    text="이전"
-                    bgColor="bg-custom-font-lightgray"
-                    fontSize="text-xs"
-                    onClick={() => navigate("/")}
-                />
+            <div className="p-4 max-w-[480px] mx-auto w-full fixed bottom-20 left-0 right-0 flex justify-end">
                 {isInitialSelection ? (
                     <Button
                         text="건너뛰기"

@@ -14,7 +14,9 @@ export function SearchLocation() {
     };
 
     const handleSkip = () => {
-        setLocation("전체");
+        if (!location) {
+            setLocation("전체");
+        }
         navigate("/search/step3");
     };
 
