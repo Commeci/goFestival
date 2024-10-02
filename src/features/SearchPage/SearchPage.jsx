@@ -3,11 +3,12 @@ import {
     CalendarIcon,
     CloseIcon,
     LocationIcon,
+    TopButtonIcon,
 } from "../../components/ui/icon";
 import useSearchStore from "../../store/searchStore";
 import { CardList } from "../../components/CardList";
 import { getFestivalData } from "../../network/publicData";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { regionList } from "../../constants/regionList";
 
 export default function SearchPage() {
@@ -17,9 +18,26 @@ export default function SearchPage() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [festivals, setFestivals] = useState([]);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
+    const observer = useRef();
+    const lastFestivalElementRef = useCallback(
+        (node) => {
+            if (isLoading) return;
+            if (observer.current) observer.current.disconnect();
+            observer.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && hasMore) {
+                    setPage((prevPage) => prevPage + 1);
+                }
+            });
+            if (node) observer.current.observe(node);
+        },
+        [isLoading, hasMore]
+    );
+
+    const fetchData = useCallback(
+        async (pageNum) => {
             setIsLoading(true);
             try {
                 const [startDate, endDate] = dateRange || [];
@@ -36,21 +54,49 @@ export default function SearchPage() {
                 const results = await getFestivalData(
                     formattedStartDate,
                     formattedEndDate,
-                    areaCode
+                    areaCode,
+                    pageNum
                 );
-                setSearchResults(results);
-                // 실제 축제 데이터 배열을 festivals 상태에 저장
-                setFestivals(results.response.body.items.item || []);
+
+                const newFestivals = results.response.body.items.item || [];
+                if (Array.isArray(newFestivals)) {
+                    setFestivals((prevFestivals) =>
+                        pageNum === 1
+                            ? newFestivals
+                            : [...prevFestivals, ...newFestivals]
+                    );
+                    setHasMore(newFestivals.length === 6);
+                } else {
+                    setHasMore(false);
+                }
+
+                if (pageNum === 1) {
+                    setSearchResults(results);
+                }
             } catch (error) {
                 console.error("Error searching festivals:", error);
-                setFestivals([]);
+                if (pageNum === 1) {
+                    setFestivals([]);
+                }
             } finally {
                 setIsLoading(false);
             }
-        };
+        },
+        [dateRange, location, keyword, setSearchResults]
+    );
 
-        fetchData();
-    }, [dateRange, location, keyword, setSearchResults]);
+    useEffect(() => {
+        setFestivals([]);
+        setPage(1);
+        setHasMore(true);
+        fetchData(1);
+    }, [dateRange, location, keyword, fetchData]);
+
+    useEffect(() => {
+        if (page > 1) {
+            fetchData(page);
+        }
+    }, [page, fetchData]);
 
     const formatDate = (date) => {
         return (
@@ -63,6 +109,13 @@ export default function SearchPage() {
     const formatDateRange = (start, end) => {
         if (!start || !end) return "날짜";
         return `${formatDate(start)} - ${formatDate(end)}`;
+    };
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     };
 
     return (
@@ -103,16 +156,31 @@ export default function SearchPage() {
                 </button>
             </p>
             <div className="mt-4">
-                {isLoading ? (
-                    <p>검색 중입니다...</p>
-                ) : festivals.length > 0 ? (
+                {festivals.length > 0 ? (
                     <>
                         <p>검색 결과: {festivals.length}개</p>
-                        <CardList items={festivals} />
+                        <CardList
+                            items={festivals}
+                            lastElementRef={lastFestivalElementRef}
+                        />
                     </>
                 ) : (
                     <p>검색 결과가 없습니다.</p>
                 )}
+                {isLoading && <p>검색 중입니다...</p>}
+                {!hasMore && festivals.length > 0 && (
+                    <p className="p-2 bg-gray-300 rounded-lg">
+                        더 이상 결과가 없습니다.
+                    </p>
+                )}
+            </div>
+            <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-[480px]">
+                <button
+                    className="text-white absolute w-10 h-10 right-4 p-2 bg-custom-orange rounded-full shadow-md"
+                    onClick={scrollToTop}
+                >
+                    <TopButtonIcon />
+                </button>
             </div>
         </div>
     );

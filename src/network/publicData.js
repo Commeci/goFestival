@@ -15,13 +15,14 @@ const publicDataAPI = axios.create({
 export const getFestivalData = async (
     startDate,
     endDate = "",
-    areaCode = ""
+    areaCode = "",
+    pageNo = 1
 ) => {
     try {
         const params = {
             eventStartDate: startDate,
             numOfRows: 6,
-            pageNo: 1,
+            pageNo: pageNo,
         };
 
         if (endDate) {
