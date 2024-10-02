@@ -22,21 +22,18 @@ export default function HomePage() {
                     .toISOString()
                     .split("T")[0]
                     .replace(/-/g, "");
-                let response;
-                if (selectedRegion === "0") {
-                    response = await getFestivalData(currentDate, oneYearLater);
-                } else {
-                    response = await getFestivalData(
-                        currentDate,
-                        oneYearLater,
-                        selectedRegion
-                    );
-                }
+
+                const response = await getFestivalData(
+                    currentDate,
+                    oneYearLater,
+                    selectedRegion
+                );
+
                 setFestivalData(response.response.body.items.item);
                 setLoading(false);
             } catch (e) {
                 setError("데이터를 불러오는 데 실패했습니다.");
-                console.log(e);
+                console.error(e);
                 setLoading(false);
             }
         };

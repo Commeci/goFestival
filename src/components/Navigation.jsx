@@ -1,10 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { HomeIcon, SearchIcon, WishIcon } from "./ui/icon";
+import useSearchStore from "../store/searchStore";
 
 export function Navigation() {
     const navigate = useNavigate();
     const location = useLocation();
+    const resetSearch = useSearchStore((state) => state.resetSearch);
     const handleClick = (path) => {
+        if (path === "/search/step1") {
+            resetSearch();
+        }
         navigate(path);
     };
 

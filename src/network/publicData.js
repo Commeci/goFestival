@@ -18,14 +18,22 @@ export const getFestivalData = async (
     areaCode = ""
 ) => {
     try {
+        const params = {
+            eventStartDate: startDate,
+            numOfRows: 6,
+            pageNo: 1,
+        };
+
+        if (endDate) {
+            params.eventEndDate = endDate;
+        }
+
+        if (areaCode && areaCode !== "0") {
+            params.areaCode = areaCode;
+        }
+
         const response = await publicDataAPI.get("/searchFestival1", {
-            params: {
-                eventStartDate: startDate,
-                eventEndDate: endDate,
-                areaCode: areaCode,
-                numOfRows: 6,
-                pageNo: 1,
-            },
+            params,
         });
         return response.data;
     } catch (error) {
