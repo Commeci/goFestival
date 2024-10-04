@@ -3,6 +3,7 @@ import Button from "../../../components/ui/Button";
 import { ProgressBar } from "./ProgressBar";
 import useSearchStore from "../../../store/searchStore";
 
+// TODO: 키워드 검색 기능
 export function SearchKeyword() {
     const navigate = useNavigate();
     const { setKeyword, keyword } = useSearchStore();
