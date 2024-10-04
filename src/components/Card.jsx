@@ -80,11 +80,15 @@ export function Card({ id, img, title, date, location }) {
             >
                 <WishFullIcon />
             </button>
-            <p className="text-base font-bold mt-3 mb-3 text-custom-font">
+            <p className="text-base font-bold mt-3 mb-3 text-custom-font dark:text-white">
                 {title}
             </p>
-            <p className="text-sm text-custom-font-gray">{date}</p>
-            <p className="text-sm text-custom-font-gray">{location}</p>
+            <p className="text-sm text-custom-font-gray dark:text-custom-font-lightgray">
+                {date}
+            </p>
+            <p className="text-sm text-custom-font-gray dark:text-custom-font-lightgray">
+                {location}
+            </p>
         </div>
     );
 }

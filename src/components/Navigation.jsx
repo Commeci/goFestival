@@ -17,20 +17,20 @@ export function Navigation() {
         if (path === "/") {
             return location.pathname === "/"
                 ? "text-custom-orange"
-                : "text-gray-500";
+                : "text-custom-font-gray dark:text-custom-font-lightgray";
         } else if (path.startsWith("/search")) {
             return location.pathname.startsWith("/search")
                 ? "text-custom-orange"
-                : "text-gray-500";
+                : "text-custom-font-gray dark:text-custom-font-lightgray";
         } else if (path === "/wish") {
             return location.pathname === "/wish"
                 ? "text-custom-orange"
-                : "text-gray-500";
+                : "text-custom-font-gray dark:text-custom-font-lightgray";
         }
-        return "text-gray-500";
+        return "text-custom-font-gray dark:text-custom-font-lightgray";
     };
     return (
-        <div className="flex bg-white justify-evenly p-3 fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[480px] shadow-top z-10">
+        <div className="flex bg-white justify-evenly p-3 fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[480px] shadow-top z-10 dark:bg-custom-darkmode dark:shadow-white">
             <button
                 onClick={() => handleClick("/")}
                 className={getButtonColor("/")}

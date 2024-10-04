@@ -27,8 +27,8 @@ export default function DetailPage() {
         fetchFestivalDetail();
     }, [id]);
 
-    if (loading) return <div>로딩중...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (loading) return <div className="dark:text-white">로딩중...</div>;
+    if (error) return <div className="dark:text-white">Error: {error}</div>;
 
     return (
         <div className="mt-[-40px]">

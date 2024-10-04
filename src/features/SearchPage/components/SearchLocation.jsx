@@ -22,14 +22,14 @@ export function SearchLocation() {
 
     return (
         <div className="flex flex-col h-[calc(100vh-250px)]">
-            <div className="mt-[-90px] flex-grow overflow-hidden">
+            <div className="mt-[-90px] flex-grow">
                 <ProgressBar />
-                <div className="flex-1 overflow-y-auto h-[calc(100vh-250px)] mt-10">
-                    <div className="flex flex-col items-center rounded-lg shadow-bottom">
+                <div className="flex-1 overflow-y-auto h-[calc(100vh-250px)] mt-10 rounded-xl shadow-bottom dark:shadow-white">
+                    <div className="flex flex-col items-center ">
                         {regionList.map((region) => (
                             <button
                                 key={region.code}
-                                className={`w-full p-6 text-lg border-b-2 border-custom-lightgray overflow-hidden ${
+                                className={`w-full p-6 text-lg border-b-2 border-custom-lightgray overflow-hidden  ${
                                     location === region.name
                                         ? "bg-custom-orange text-white"
                                         : "bg-white text-custom-font"
@@ -42,7 +42,7 @@ export function SearchLocation() {
                     </div>
                 </div>
             </div>
-            <div className="p-4 max-w-[480px] mx-auto w-full fixed bottom-20 left-0 right-0 flex justify-between">
+            <div className="p-4 max-w-[480px] mx-auto w-full fixed bottom-20 left-0 right-0 flex justify-between dark:bg-custom-darkmode">
                 <Button
                     text="이전"
                     bgColor="bg-custom-font-lightgray"
