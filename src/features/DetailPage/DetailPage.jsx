@@ -31,7 +31,7 @@ export default function DetailPage() {
     if (error) return <div className="dark:text-white">Error: {error}</div>;
 
     return (
-        <div className="mt-[-40px]">
+        <div className="mt-[-35px]">
             <DetailCard data={festivalDetail} date={date} />
             <MapArea mapx={festivalDetail.mapx} mapy={festivalDetail.mapy} />
         </div>
