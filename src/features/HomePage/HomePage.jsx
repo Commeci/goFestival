@@ -93,7 +93,7 @@ export default function HomePage() {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="relative dark:bg-custom-darkmode">
+        <div className="relative dark:bg-custom-darkmode mt-2">
             <CardList
                 items={festivalData}
                 lastElementRef={lastFestivalElementRef}

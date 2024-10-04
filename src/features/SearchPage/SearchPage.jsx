@@ -193,7 +193,7 @@ export default function SearchPage() {
                 )}
                 {isLoading && <p>검색 중입니다...</p>}
                 {!hasMore && filteredFestivals.length > 0 && (
-                    <p className="p-2 bg-gray-300 rounded-lg">
+                    <p className="p-2 bg-gray-300 rounded-lg text-custom-font-gray">
                         더 이상 결과가 없습니다.
                     </p>
                 )}

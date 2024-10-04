@@ -49,7 +49,7 @@ export default function WishListPage() {
     }
 
     return (
-        <div className="mt-[-40px] dark:text-white">
+        <div className="mt-[-35px] dark:text-white">
             {wishListItems.length > 0 ? (
                 <CardList items={wishListItems} />
             ) : (
