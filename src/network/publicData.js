@@ -16,12 +16,13 @@ export const getFestivalData = async (
     startDate,
     endDate = "",
     areaCode = "",
-    pageNo = 1
+    pageNo = 1,
+    keyword = ""
 ) => {
     try {
         const params = {
             eventStartDate: startDate,
-            numOfRows: 6,
+            numOfRows: keyword ? 40 : 6,
             pageNo: pageNo,
         };
 

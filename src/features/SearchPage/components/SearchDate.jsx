@@ -8,7 +8,6 @@ import styled from "styled-components";
 import useSearchStore from "../../../store/searchStore";
 import { useEffect, useState } from "react";
 
-// TODO: 오늘 날짜 폰트 색깔 이외에도 색깔들 관리
 const StyledCalendarContainer = styled.div`
     width: 100%;
     display: flex;
@@ -112,7 +111,7 @@ export function SearchDate() {
     const [isInitialSelection, setIsInitialSelection] = useState(true);
 
     useEffect(() => {
-        if (!dateRange) {
+        if (!dateRange || (dateRange[0] === null && dateRange[1] === null)) {
             setDateRange(localDateRange);
         }
     }, []);
@@ -132,17 +131,12 @@ export function SearchDate() {
     };
 
     const handleSkip = () => {
-        const today = new Date();
-        setLocalDateRange([today, today]);
-        setDateRange([today, today]);
-        navigate("/search/step2");
-    };
-
-    const handleNext = () => {
-        if (localDateRange[0] && localDateRange[1]) {
-            setDateRange(localDateRange);
-            navigate("/search/step2");
+        if (!dateRange || (dateRange[0] === null && dateRange[1] === null)) {
+            const today = new Date();
+            setLocalDateRange([today, today]);
+            setDateRange([today, today]);
         }
+        navigate("/search/step2");
     };
 
     const tileClassName = ({ date, view }) => {
@@ -201,19 +195,11 @@ export function SearchDate() {
                 </StyledCalendarContainer>
             </div>
             <div className="p-4 max-w-[480px] mx-auto w-full fixed bottom-20 left-0 right-0 flex justify-end">
-                {isInitialSelection ? (
-                    <Button
-                        text="건너뛰기"
-                        fontSize="text-xs"
-                        onClick={handleSkip}
-                    />
-                ) : (
-                    <Button
-                        text="다음"
-                        fontSize="text-xs"
-                        onClick={handleNext}
-                    />
-                )}
+                <Button
+                    text="건너뛰기"
+                    fontSize="text-xs"
+                    onClick={handleSkip}
+                />
             </div>
         </div>
     );

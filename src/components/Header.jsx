@@ -11,6 +11,7 @@ import { regionList } from "../constants/regionList";
 import { useLocation, useNavigate } from "react-router-dom";
 import useRegionStore from "../store/regionStore";
 
+// TODO: 다크모드
 export function Header() {
     const selectedRegion = useRegionStore((state) => state.selectedRegion);
     const setSelectedRegion = useRegionStore(

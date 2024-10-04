@@ -18,6 +18,7 @@ export default function SearchPage() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [festivals, setFestivals] = useState([]);
+    const [filteredFestivals, setFilteredFestivals] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
 
@@ -55,17 +56,19 @@ export default function SearchPage() {
                     formattedStartDate,
                     formattedEndDate,
                     areaCode,
-                    pageNum
+                    pageNum,
+                    keyword
                 );
 
                 const newFestivals = results.response.body.items.item || [];
+
                 if (Array.isArray(newFestivals)) {
                     setFestivals((prevFestivals) =>
                         pageNum === 1
                             ? newFestivals
                             : [...prevFestivals, ...newFestivals]
                     );
-                    setHasMore(newFestivals.length === 6);
+                    setHasMore(newFestivals.length === (keyword ? 40 : 6));
                 } else {
                     setHasMore(false);
                 }
@@ -85,8 +88,26 @@ export default function SearchPage() {
         [dateRange, location, keyword, setSearchResults]
     );
 
+    const filterFestivals = useCallback(() => {
+        if (!keyword) {
+            setFilteredFestivals(festivals);
+            return;
+        }
+
+        const filtered = festivals.filter((festival) =>
+            festival.title.toLowerCase().includes(keyword.toLowerCase())
+        );
+
+        setFilteredFestivals(filtered);
+
+        if (filtered.length === 0 && hasMore) {
+            setPage((prevPage) => prevPage + 1);
+        }
+    }, [festivals, keyword, hasMore]);
+
     useEffect(() => {
         setFestivals([]);
+        setFilteredFestivals([]);
         setPage(1);
         setHasMore(true);
         fetchData(1);
@@ -97,6 +118,10 @@ export default function SearchPage() {
             fetchData(page);
         }
     }, [page, fetchData]);
+
+    useEffect(() => {
+        filterFestivals();
+    }, [festivals, keyword, filterFestivals]);
 
     const formatDate = (date) => {
         return (
@@ -156,11 +181,10 @@ export default function SearchPage() {
                 </button>
             </p>
             <div className="mt-4">
-                {festivals.length > 0 ? (
+                {filteredFestivals.length > 0 ? (
                     <>
-                        <p>검색 결과: {festivals.length}개</p>
                         <CardList
-                            items={festivals}
+                            items={filteredFestivals}
                             lastElementRef={lastFestivalElementRef}
                         />
                     </>
@@ -168,7 +192,7 @@ export default function SearchPage() {
                     <p>검색 결과가 없습니다.</p>
                 )}
                 {isLoading && <p>검색 중입니다...</p>}
-                {!hasMore && festivals.length > 0 && (
+                {!hasMore && filteredFestivals.length > 0 && (
                     <p className="p-2 bg-gray-300 rounded-lg">
                         더 이상 결과가 없습니다.
                     </p>
