@@ -90,7 +90,7 @@ export default function HomePage() {
         }
     }, [page, fetchData]);
 
-    if (error) return <div>{error}</div>;
+    if (error) return <div className="dark:text-white">{error}</div>;
 
     return (
         <div className="relative dark:bg-custom-darkmode mt-2">
