@@ -21,6 +21,9 @@ export function MapView({ mapx, mapy, category, onPlacesFound }) {
                         let nearbyPlaces = [];
 
                         for (var i = 0; i < data.length; i++) {
+                            const distanceInKm = data[i].distance
+                                ? parseInt(data[i].distance)
+                                : "N/A";
                             const place = {
                                 position: {
                                     lat: data[i].y,
@@ -32,9 +35,7 @@ export function MapView({ mapx, mapy, category, onPlacesFound }) {
                             markers.push(place);
                             nearbyPlaces.push({
                                 name: data[i].place_name,
-                                distance: `${(data[i].distance / 1000).toFixed(
-                                    1
-                                )}km`,
+                                distance: `${distanceInKm}m`,
                                 type: category,
                                 lat: data[i].y,
                                 lng: data[i].x,
@@ -74,7 +75,7 @@ export function MapView({ mapx, mapy, category, onPlacesFound }) {
     return (
         <Map
             center={center}
-            style={{ width: "100%", height: "500px" }}
+            style={{ width: "100%", height: "500px", "border-radius": "10px" }}
             level={level}
             onCreate={setMap}
             onCenterChanged={handleCenterChanged}

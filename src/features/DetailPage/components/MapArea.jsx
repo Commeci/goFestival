@@ -13,7 +13,7 @@ export function MapArea({ mapx, mapy }) {
 
     return (
         <div className="relative">
-            <h3 className="text-base font-bold">주변 정보</h3>
+            <h3 className="text-base font-bold dark:text-white">주변 정보</h3>
             <Button
                 text="음식점"
                 bgColor={
@@ -40,7 +40,7 @@ export function MapArea({ mapx, mapy }) {
             />
             {category && (
                 <>
-                    <h3 className="text-base font-bold mt-6">
+                    <h3 className="text-base font-bold mt-6 dark:text-white">
                         주변 {category} 검색 결과
                     </h3>
                     <AroundCardList places={nearbyPlaces} />

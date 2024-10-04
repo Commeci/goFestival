@@ -26,7 +26,7 @@ export function ProgressBar() {
     };
 
     return (
-        <div className="w-[90%] bg-gray-200 rounded-full h-1.5 dark:bg-gray-700 m-auto mt-8 relative">
+        <div className="w-[90%] bg-gray-200 rounded-full h-1.5  m-auto mt-8 relative">
             <div
                 className="bg-custom-orange h-1.5 rounded-full transition-all duration-300"
                 style={{ width: getWidth() }}

@@ -93,12 +93,12 @@ export default function HomePage() {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="relative ">
+        <div className="relative dark:bg-custom-darkmode">
             <CardList
                 items={festivalData}
                 lastElementRef={lastFestivalElementRef}
             />
-            {loading && <div>로딩 중...</div>}
+            {loading && <div className="dark:text-white">로딩 중...</div>}
             {!hasMore && (
                 <div className="p-2 rounded-lg bg-gray-300">
                     더 이상 불러올 데이터가 없습니다.

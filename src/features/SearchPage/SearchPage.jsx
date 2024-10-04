@@ -144,10 +144,10 @@ export default function SearchPage() {
     };
 
     return (
-        <div className="mt-[-90px] text-custom-font-gray">
+        <div className="mt-[-90px] text-custom-font-gray dark:text-white">
             <div className="flex gap-2 mb-2">
                 <p
-                    className="flex shadow-bottom p-2 rounded-lg items-center w-1/2"
+                    className="flex shadow-bottom p-2 rounded-lg items-center w-1/2 dark:shadow-white"
                     onClick={() => navigate("/search/step1")}
                 >
                     <CalendarIcon />
@@ -158,7 +158,7 @@ export default function SearchPage() {
                     </span>
                 </p>
                 <p
-                    className="flex shadow-bottom p-2 rounded-lg items-center w-1/2"
+                    className="flex shadow-bottom p-2 rounded-lg items-center w-1/2 dark:shadow-white"
                     onClick={() => navigate("/search/step2")}
                 >
                     <LocationIcon />
@@ -166,7 +166,7 @@ export default function SearchPage() {
                 </p>
             </div>
             <p
-                className="flex shadow-bottom p-2 relative rounded-lg"
+                className="flex shadow-bottom p-2 relative rounded-lg dark:shadow-white"
                 onClick={() => navigate("/search/step3")}
             >
                 <span>{keyword || "키워드"}</span>
@@ -189,7 +189,7 @@ export default function SearchPage() {
                         />
                     </>
                 ) : (
-                    <p>검색 결과가 없습니다.</p>
+                    <p className="dark:text-white">검색 결과가 없습니다.</p>
                 )}
                 {isLoading && <p>검색 중입니다...</p>}
                 {!hasMore && filteredFestivals.length > 0 && (

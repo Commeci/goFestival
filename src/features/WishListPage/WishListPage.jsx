@@ -45,15 +45,15 @@ export default function WishListPage() {
     }, []);
 
     if (loading) {
-        return <div>로딩중...</div>;
+        return <div className="dark:text-white">로딩중...</div>;
     }
 
     return (
-        <div className="mt-[-40px]">
+        <div className="mt-[-40px] dark:text-white">
             {wishListItems.length > 0 ? (
                 <CardList items={wishListItems} />
             ) : (
-                <p>찜한 축제가 없습니다</p>
+                <p className="dark:text-white">찜한 축제가 없습니다</p>
             )}
         </div>
     );

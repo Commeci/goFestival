@@ -65,10 +65,13 @@ export function DetailCard({ data, date }) {
 
     return (
         <div>
-            <button className="absolute" onClick={() => navigate("/")}>
+            <button
+                className="absolute dark:text-white"
+                onClick={() => navigate("/")}
+            >
                 <ArrowBack />
             </button>
-            <h2 className="text-base font-bold text-center mb-6">
+            <h2 className="text-base font-bold text-center mb-6 dark:text-white">
                 {data.title}
             </h2>
             <div className="w-full relative mb-6">
@@ -100,21 +103,23 @@ export function DetailCard({ data, date }) {
                 >
                     <WishFullIcon />
                 </button>
-                <p className="text-sm text-custom-font-gray flex mb-2 items-center">
+                <p className="text-sm text-custom-font-gray flex mb-2 items-center dark:text-custom-font-lightgray">
                     <CalendarIcon />
                     <span className="ml-2"> {date}</span>
                 </p>
-                <p className="text-sm text-custom-font-gray flex mb-2 items-center">
+                <p className="text-sm text-custom-font-gray flex mb-2 items-center dark:text-custom-font-lightgray">
                     <LocationIcon />
                     <span className="ml-2">
                         {data.addr1} {data.addr2}
                     </span>
                 </p>
-                <p className="text-sm text-custom-font-gray flex mb-2 items-center">
+                <p className="text-sm text-custom-font-gray flex mb-2 items-center dark:text-custom-font-lightgray">
                     <CallIcon />
                     <span className="ml-2"> {data.tel}</span>
                 </p>
-                <p>{data.overview}</p>
+                <p className="dark:text-custom-font-lightgray">
+                    {data.overview}
+                </p>
             </div>
         </div>
     );

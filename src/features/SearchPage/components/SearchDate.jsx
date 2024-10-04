@@ -175,7 +175,7 @@ export function SearchDate() {
                         selectRange={true}
                         tileClassName={tileClassName}
                         formatDay={(locale, date) => moment(date).format("DD")}
-                        className="shadow-bottom rounded-lg p-4"
+                        className="shadow-bottom rounded-lg p-4 dark:shadow-white"
                         navigationLabel={({ date }) => (
                             <span className="text-lg font-bold text-center w-full block">
                                 {moment(date).format("YYYY.MM")}
@@ -194,7 +194,7 @@ export function SearchDate() {
                     />
                 </StyledCalendarContainer>
             </div>
-            <div className="p-4 max-w-[480px] mx-auto w-full fixed bottom-20 left-0 right-0 flex justify-end">
+            <div className="p-4 max-w-[480px] mx-auto w-full fixed bottom-20 left-0 right-0 flex justify-end dark:bg-custom-darkmode">
                 <Button
                     text="건너뛰기"
                     fontSize="text-xs"
