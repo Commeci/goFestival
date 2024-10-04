@@ -41,7 +41,7 @@ export function Header() {
     };
 
     return (
-        <div className="z-10 p-3 bg-white fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-[480px] shadow-bottom dark:bg-custom-darkmode dark:shadow-white">
+        <div className="z-50 p-3 bg-white fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-[480px] shadow-bottom dark:bg-custom-darkmode dark:shadow-white">
             <div className=" flex justify-between">
                 <img
                     src={logo}

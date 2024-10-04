@@ -30,7 +30,7 @@ export function Navigation() {
         return "text-custom-font-gray dark:text-custom-font-lightgray";
     };
     return (
-        <div className="flex bg-white justify-evenly p-3 fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[480px] shadow-top z-10 dark:bg-custom-darkmode dark:shadow-white">
+        <div className="flex bg-white justify-evenly p-3 fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[480px] shadow-top z-50 dark:bg-custom-darkmode dark:shadow-white">
             <button
                 onClick={() => handleClick("/")}
                 className={getButtonColor("/")}
