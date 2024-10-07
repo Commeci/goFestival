@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from "react";
-import { CardList, Spinner } from "../../components";
+import { CardList, NoCard, Spinner } from "../../components";
 import { getFestivalData } from "../../network/publicData";
 import useRegionStore from "../../store/regionStore";
 import { TopButtonIcon } from "../../components/ui/icon";
@@ -99,11 +99,7 @@ export default function HomePage() {
                 lastElementRef={lastFestivalElementRef}
             />
             {loading && <Spinner />}
-            {!hasMore && (
-                <div className="p-2 rounded-lg bg-gray-300">
-                    더 이상 불러올 데이터가 없습니다.
-                </div>
-            )}
+            {!hasMore && <NoCard />}
             <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-[480px]">
                 <button
                     className="text-white absolute w-10 h-10 right-4 p-2 bg-custom-orange rounded-full shadow-md"
