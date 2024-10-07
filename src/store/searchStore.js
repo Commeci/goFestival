@@ -1,7 +1,9 @@
 import { create } from "zustand";
 
+const today = new Date();
+
 const useSearchStore = create((set) => ({
-    dateRange: [],
+    dateRange: [today, today],
     location: "",
     keyword: "",
     searchResults: [],

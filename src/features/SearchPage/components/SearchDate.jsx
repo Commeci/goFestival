@@ -105,16 +105,15 @@ const StyledCalendarContainer = styled.div`
 export function SearchDate() {
     const navigate = useNavigate();
     const { dateRange, setDateRange } = useSearchStore();
-    const [localDateRange, setLocalDateRange] = useState(
-        dateRange || [null, null]
-    );
+    const today = [new Date(), new Date()];
+    const [localDateRange, setLocalDateRange] = useState(today);
     const [isInitialSelection, setIsInitialSelection] = useState(true);
 
     useEffect(() => {
-        if (!dateRange || (dateRange[0] === null && dateRange[1] === null)) {
-            setDateRange(localDateRange);
+        if (dateRange && dateRange.length === 2) {
+            setLocalDateRange(dateRange);
         }
-    }, []);
+    }, [dateRange]);
 
     const onChange = (value) => {
         setLocalDateRange(value);
@@ -131,11 +130,7 @@ export function SearchDate() {
     };
 
     const handleSkip = () => {
-        if (!dateRange || (dateRange[0] === null && dateRange[1] === null)) {
-            const today = new Date();
-            setLocalDateRange([today, today]);
-            setDateRange([today, today]);
-        }
+        setDateRange(localDateRange);
         navigate("/search/step2");
     };
 
