@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from "react";
-import { CardList } from "../../components";
+import { CardList, Spinner } from "../../components";
 import { getFestivalData } from "../../network/publicData";
 import useRegionStore from "../../store/regionStore";
 import { TopButtonIcon } from "../../components/ui/icon";
@@ -98,7 +98,7 @@ export default function HomePage() {
                 items={festivalData}
                 lastElementRef={lastFestivalElementRef}
             />
-            {loading && <div className="dark:text-white">로딩 중...</div>}
+            {loading && <Spinner />}
             {!hasMore && (
                 <div className="p-2 rounded-lg bg-gray-300">
                     더 이상 불러올 데이터가 없습니다.

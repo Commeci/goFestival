@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFestivalDetail } from "../../network/publicData";
 import { CardList } from "../../components/CardList";
+import { Spinner } from "../../components";
 
 export default function WishListPage() {
     const [wishListItems, setWishListItems] = useState([]);
@@ -45,7 +46,7 @@ export default function WishListPage() {
     }, []);
 
     if (loading) {
-        return <div className="dark:text-white">로딩중...</div>;
+        return <Spinner />;
     }
 
     return (
