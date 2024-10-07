@@ -175,6 +175,7 @@ export default function SearchPage() {
                     onClick={(e) => {
                         e.stopPropagation();
                         resetSearch();
+                        navigate("/search/step1");
                     }}
                 >
                     <CloseIcon />
