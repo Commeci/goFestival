@@ -3,6 +3,7 @@ import { DetailCard } from "./components/DetailCard";
 import { MapArea } from "./components/MapArea";
 import { useEffect, useState } from "react";
 import { getFestivalDetail } from "../../network/publicData";
+import { Spinner } from "../../components";
 
 export default function DetailPage() {
     const { id } = useParams();
@@ -27,7 +28,7 @@ export default function DetailPage() {
         fetchFestivalDetail();
     }, [id]);
 
-    if (loading) return <div className="dark:text-white">로딩중...</div>;
+    if (loading) return <Spinner />;
     if (error) return <div className="dark:text-white">Error: {error}</div>;
 
     return (
