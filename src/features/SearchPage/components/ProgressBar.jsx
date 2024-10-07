@@ -36,11 +36,11 @@ export function ProgressBar() {
                     className="flex flex-col items-center relative"
                     style={{ left: "-10px" }}
                 >
-                    <span className="text-xs mb-2">날짜</span>
+                    <span className="text-xs mb-2 dark:text-white">날짜</span>
                     <div className="w-5 h-5 bg-custom-orange rounded-full absolute bottom-[-12px]"></div>
                 </div>
                 <div className="flex flex-col items-center">
-                    <span className="text-xs mb-2">지역</span>
+                    <span className="text-xs mb-2 dark:text-white">지역</span>
                     <div
                         className={`w-5 h-5 rounded-full absolute bottom-[-12px] ${
                             currentStep >= 2
@@ -53,7 +53,7 @@ export function ProgressBar() {
                     className="flex flex-col items-center relative"
                     style={{ right: "-10px" }}
                 >
-                    <span className="text-xs mb-2">키워드</span>
+                    <span className="text-xs mb-2 dark:text-white">키워드</span>
                     <div
                         className={`w-5 h-5 rounded-full absolute bottom-[-12px] ${
                             currentStep >= 3
