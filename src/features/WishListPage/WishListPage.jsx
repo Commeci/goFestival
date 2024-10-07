@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFestivalDetail } from "../../network/publicData";
 import { CardList } from "../../components/CardList";
-import { Spinner } from "../../components";
+import { NoWish, Spinner } from "../../components";
 
 export default function WishListPage() {
     const [wishListItems, setWishListItems] = useState([]);
@@ -54,7 +54,7 @@ export default function WishListPage() {
             {wishListItems.length > 0 ? (
                 <CardList items={wishListItems} />
             ) : (
-                <p className="dark:text-white">찜한 축제가 없습니다</p>
+                <NoWish />
             )}
         </div>
     );
