@@ -12,3 +12,4 @@ export { WishFullIcon } from "./WishFullIcon";
 export { HomeIcon } from "./HomeIcon";
 export { TopButtonIcon } from "./TopButtonIcon";
 export { ArrowBack } from "./ArrowBack";
+export { Warning } from "./Warning";
