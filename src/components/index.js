@@ -5,3 +5,4 @@ export { CardList } from "./CardList";
 export { NoItem } from "./NoItem";
 export { Spinner } from "./Spinner";
 export { NoWish } from "./NoWish";
+export { NoCard } from "./NoCard";
