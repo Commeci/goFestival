@@ -10,7 +10,7 @@ import { CardList } from "../../components/CardList";
 import { getFestivalData } from "../../network/publicData";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { regionList } from "../../constants/regionList";
-import { NoItem } from "../../components";
+import { NoItem, Spinner } from "../../components";
 
 export default function SearchPage() {
     const navigate = useNavigate();
@@ -193,7 +193,7 @@ export default function SearchPage() {
                 ) : (
                     <NoItem />
                 )}
-                {isLoading && <p>검색 중입니다...</p>}
+                {isLoading && <Spinner />}
                 {!hasMore && filteredFestivals.length > 0 && (
                     <p className="p-2 bg-gray-300 rounded-lg text-custom-font-gray">
                         더 이상 결과가 없습니다.
