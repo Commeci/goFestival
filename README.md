@@ -1,147 +1,61 @@
-# 축제7ㅏ자
+# 축제7ㅏ자 
+## 📱 프로젝트 소개
 
-[API : 한국관광공사\_국문 관광정보 서비스\_GW ](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15101578#/)
+축제가자는 축제와 주변 관광 정보를 통합 제공하는 서비스입니다.
 
-배포 url : https://go-festival.vercel.app/
+### 🔗 배포 링크
+**[축제7ㅏ자 바로가기](https://go-festival.vercel.app/)**
 
-## 프로젝트 소개
+![image](https://github.com/user-attachments/assets/5e0b2440-0739-44bd-a1a2-61332f7c20b1)
 
-```
-현재 국내에서 진행하는 축제 정보 제공
-지역으로 검색, 날짜로 검색, 키워드로 검색 기능 제공
-상세정보보기 및 위시리스트에 저장가능
-모바일 기준으로 사이트 제작
-```
+- 현재 국내에서 진행하는 축제 정보 제공
+- 지역으로 검색, 날짜로 검색, 키워드로 검색 기능 제공
+- 상세정보보기 및 위시리스트에 저장가능
+- 모바일 기준으로 사이트 제작
 
-## 개발 환경
+## 🛠 주요 기능
 
--   vite
--   react
--   javascript
--   tailwind
--   zustand
--   vercel
+### 1. 축제 검색 시스템
+- 지역, 날짜, 키워드로 축제 검색
+- 다양한 필터링 옵션 제공
+- 직관적인 검색 결과 표시
 
-## 개발 진행 사항
+### 2. 축제 상세 정보
+- 축제 기간 및 일정 안내
+- 정확한 위치 정보 제공
+- 진행 상태 실시간 확인
 
-### 컴포넌트 ⭕
+### 3. 개인화 기능
+- 관심 축제 찜하기 기능
 
-> header ⭕
-> 
-> -   로고 ⭕
->
-> -   다크모드, 라이트모드 ⭕
->
-> navigation ⭕
->
-> -   페이지 이동 ⭕
->
-> -   현재 페이지 아이콘 색깔 변경 ⭕
->
-> button 컴포넌트 ⭕
->
-> icon 컴포넌트 ⭕
->
-> card 컴포넌트 ⭕
->
-> -   img ⭕
-> -   title, date, location ⭕
-> -   wish ⭕
-> -   state ⭕
->
-> cardList 컴포넌트 ⭕
->
-> 상단으로 바로 이동 ⭕
+### 4. 주변 시설 탐색
+- 카카오맵 연동 위치 확인
+- 축제 주변 맛집 탐색
+- 인근 카페 및 편의시설 정보
 
-### 홈 페이지 ⭕
+### 5. 사용자 경험
+- 다크모드/라이트모드 지원
+- 반응형 디자인으로 모바일 최적화
 
-> swiper ⭕
->
-> -   regionList로 버튼 생성 ⭕
-> -   버튼 클릭 시 region code api로 전송 ⭕
->
-> 축제 정보 api로 받아오기 ⭕
->
-> scroll ⭕
 
-### 검색 페이지 ⭕
+## 👥 개발
 
-> 달력 라이브러리 ⭕
->
-> -   기간 선택 ⭕
-> -   기간 전역으로 저장 ⭕
-> -   날짜 선택하면 자동 다음 스텝 ⭕
->
-> 지역 선택 ⭕
->
-> -   지역 선택 scoroll ⭕
-> -   지역 선택 전역 저장 ⭕
-> -   지역 선택하면 자동 다음 스텝 ⭕
->
-> 키워드 검색 ⭕
->
-> -   키워드 검색 ui ⭕
-> -   키워드 검색 기능 ⭕
->
-> 중간에 검색어 바꾸기 ⭕
->
-> scroll ⭕
+|<img src="https://github.com/user-attachments/assets/f7307fcd-5554-4256-a515-75ce42874c4b" width="160" height="160">|
+|:---:|
+|이가은|
+|[Commeci](https://github.com/Commeci)|
 
-### 찜 페이지 ⭕
+## 🔧 기술 스택
 
-> 찜 항목 불러오기 ⭕
+### Frontend
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Zustand](https://img.shields.io/badge/Zustand-593D88?style=for-the-badge&logo=react&logoColor=white)
 
-### 상세 페이지 ⭕
+### OpenAPI
+![한국관광공사](https://img.shields.io/badge/한국관광공사-003399?style=for-the-badge&logo=southkorea&logoColor=white)
+![KakaoMap](https://img.shields.io/badge/KakaoMap-FFCD00?style=for-the-badge&logo=kakao&logoColor=black)
 
-> DetailCard ⭕
-> 
-> - wish ⭕
-> - 없는 이미지 처리 ⭕
->
-> Map ⭕
->  
-> - api 연결 ⭕
-> - 키워드 검색 api 연결 ⭕
->
-> AroundCard ⭕
-> 
-> - 주변 맛집, 음식점 검색 결과 아래에 출력 ⭕
-> - 길찾기 연결 ⭕
-> - 주변 맛집 없는 경우 처리 ⭕
 
-### 배포 ⭕
-> vercel 배포 ⭕
-
-### 추가 처리 할 필요성이 있는 사항
-> 종료된 축제
->
-> 로딩 느림 + 가끔 새고해야 보임
->
-> 달력 날짜 선택
-
-### 코드 clone 및 실행 시
-
--   코드 clone
-
-```
-git clone https://github.com/Commeci/goFestival.git
-```
-
--   종속성 설치
-
-```
-npm install
-```
-
--   .env 파일 설정 (프로젝트의 root에 생성)
-
-```
-VITE_PUBLIC_DATA_API_KEY = [한국관광공사 API키]
-VITE_KAKAOMAP_API_KEY = [KAKAOMAP API 키]
-```
-
--   개발 서버 실행
-
-```
-npm run dev
-```
