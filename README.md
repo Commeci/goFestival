@@ -56,7 +56,8 @@
 ![Zustand](https://img.shields.io/badge/Zustand-593D88?style=for-the-badge&logo=react&logoColor=white)
 
 ### OpenAPI
-![한국관광공사](https://img.shields.io/badge/한국관광공사-003399?style=for-the-badge&logo=southkorea&logoColor=white)
+[![한국관광공사](https://img.shields.io/badge/한국관광공사_국문관광정보-003399?style=for-the-badge&logo=southkorea&logoColor=white)](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15101578)
 ![KakaoMap](https://img.shields.io/badge/KakaoMap-FFCD00?style=for-the-badge&logo=kakao&logoColor=black)
+
 
 
